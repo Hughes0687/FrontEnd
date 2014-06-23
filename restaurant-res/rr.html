@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stevo's Bar Reservations</title>
+</head>
+<body>
+
+<button id="claim">Claim a Reservation</button>
+<button id="reserve">Make a Reservation</button>
+
+<div class="row">
+  <div class="small-3 large-3 small-centered large-centered columns">
+    <input id="user-input" type="text" style="text-align: left">
+  </div>
+</div>
+
+<h2>Reservations:</h2>
+<div id="reservations"><ul></ul></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var reservations = {
+  'Billy': { claimed: false }
+};
+
+var claimRes = function(name) {
+
+  if (reservations[name] == undefined) {
+    alert("That reservation is not in our system.");
+  } 
+  else if (reservations[name].claimed == false) {
+    alert("Welcome to Stevo's Bar. Follow the hostess please.");
+    reservations[name] = { claimed: true };
+    $("#reservations").remove(name);
+  } 
+  else {
+    alert("That reservation is no longer available.");
+  }
+  renderRes();
+};
+
+var makeRes = function(name) {
+
+  if (reservations[name] == undefined || (reservations[name].claimed == true)) {
+    alert("Your reservation has been made.");
+    reservations[name] = { claimed: false };
+    // $("#reservations").append("<div>" + name + "</div>");/
+  } 
+  else if (reservations[name] == {claimed: false}) {
+    alert("You already have a reservation.");
+  } 
+  else {
+    alert("Sorry that reservation is not available.");
+  }
+  renderRes();
+};
+
+var renderRes = function() {
+  console.log('this is running');
+  $("#reservations ul").empty();
+  for (var key in reservations) {
+    console.log('what is key claimed', reservations[key]['claimed'] );
+    console.log('what is key ', key );
+    if( !reservations[key]['claimed'] ) {
+      $("#reservations ul").append('<li>' + key + '</li>');
+    }
+  }
+};
+
+$("#claim").on('click', function (e) {
+  var name = $('#user-input').val();
+  claimRes(name);
+});
+
+$("#reserve").on('click', function (e) {
+  var name = $('#user-input').val();
+  makeRes(name);
+});
+
+window.onload = function() {
+  renderRes();
+};
+
+</script>
+</body>
+</html>

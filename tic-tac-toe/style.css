@@ -1,0 +1,25 @@
+#board {
+  background: #ccc;
+  width: 600px; height: 600px;
+}
+#board .space {
+  border: 2px solid #aaa;
+  box-sizing: border-box;
+  float: left;
+  line-height: 200px;
+  text-align: center;
+  width: 200px; height: 200px;
+}
+#board .space:hover {
+  cursor: pointer;
+  background: #000000;
+}
+
+#board .space.veggies {
+  background: url("img/veggies.jpg");
+  background-size: 100% 100%;
+}
+#board .space.junkfood {
+  background: url("img/junkfood.jpg");
+  background-size: 100% 100%;
+}

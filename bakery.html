@@ -1,0 +1,113 @@
+<html>
+<head>
+  <title>Bakery Bonanza</title>
+  <style type="text/css">
+  #bakery .display div { width: 200px; height: 200px; float: left; }
+  #bakery .display .cupcake { background: url("http://i.imgur.com/9ix2JRZ.jpg"); }
+  #bakery .display .cookie { background: url("http://i.imgur.com/Yxq78qn.jpg"); }
+  #bakery .display .baconm { background: url("http://emt-upload-prod.s3.amazonaws.com/wp-content/uploads/2013/05/bacon-1024x754-300x220.jpg"); }
+  </style>
+</head>
+<body>
+
+<div id="bakery">
+  <button class="make" data-good-type="cupcake">Make Cupcake</button>
+  <button class="make" data-good-type="cookie">Make Cookie</button>
+  <button class="make" data-good-type="baconm">Make Pile of Bacon</button>
+  <h4>Available Ingredients:</h4>
+  <ul class="ingredients">
+    <li class="flour">Flour: <span></span></li>
+    <li class="eggs">Eggs: <span></span></li>
+    <li class="sugar">Sugar: <span></span></li>
+    <li class="spice">Spice: <span></span></li>
+    <li class="bacon">Bacon: <span></span></li>
+  </ul>
+
+  <h3>Food Display Case</h3>
+  <div class="display"></div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+var bakery = {
+  supplies: {
+    flour: 4,
+    eggs: 12,
+    sugar: 17,
+    spice: 5,
+    bacon: 12359
+  },
+  goodRequirements: {
+    cupcake: {
+      flour: 2,
+      eggs: 1,
+      sugar: 1,
+      spice: 0,
+      bacon: 0
+    },
+    cookie: {
+      flour: 1,
+      eggs: 2,
+      sugar: 1,
+      spice: 1,
+      bacon: 0
+    },
+    baconm: {
+      flour: 0,
+      eggs: 0,
+      sugar: 0,
+      spice: 0,
+      bacon: 343
+    }
+  },
+  make: function (goodType) {
+    console.log('Attempting to make a:', goodType);
+    var req = this.goodRequirements[goodType];
+
+    if (bakery.supplies.flour >= req.flour &&
+        bakery.supplies.eggs >= req.eggs &&
+        bakery.supplies.sugar >= req.sugar &&
+        bakery.supplies.spice >= req.spice &&
+        bakery.supplies.bacon >= req.bacon) {
+
+      bakery.supplies.flour -= req.flour 
+      bakery.supplies.eggs -= req.eggs 
+      bakery.supplies.sugar -= req.sugar 
+      bakery.supplies.spice -= req.spice 
+      bakery.supplies.bacon -= req.bacon 
+      
+      this.updateIngredientsList();
+      console.log('The bakery made a ' + goodType + '!');
+
+      var goodDiv = $('<div>').addClass(goodType);
+      $('#bakery .display').append(goodDiv);
+    }
+    else {
+      alert("You don't enough supplies for this task.");
+    }
+  },
+  updateIngredientsList: function () {
+    $('.ingredients .flour span').text(this.supplies.flour);
+    $('.ingredients .eggs span').text(this.supplies.eggs);
+    $('.ingredients .sugar span').text(this.supplies.sugar);
+    $('.ingredients .spice span').text(this.supplies.spice);
+    $('.ingredients .bacon span').text(this.supplies.bacon);
+  }
+};
+
+$('#bakery .make').on('click', function (e) {
+  var goodType = $(e.currentTarget).data('good-type');
+  bakery.make(goodType);
+
+});
+
+bakery.updateIngredientsList();
+
+
+</script>
+</body>
+</html>
+
+

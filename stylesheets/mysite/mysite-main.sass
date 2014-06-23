@@ -1,0 +1,48 @@
+// adding normalize to override browser defaults
+@import normalize
+
+// provide clearfix
+@import clearfix
+
+// add grid
+@import mysite-grid
+
+// buttons
+@import mysite-buttons
+
+body
+  background-image: url(./pics/bg.jpg)
+  color: darken(white, 25%)
+
+.clearfix:before,
+.clearfix:after
+  content: " " // 1
+  display: table // 2
+
+.clearfix:after
+  clear: both
+  
+.clearfix
+  *zoom: 1
+
+html
+  font-size: 100%
+
+// Medium screens(640px)
+@media (min-width: 40rem)
+  html
+    font-size: 112%
+
+// Large screens(1024px)
+@media (min-width: 64rem)
+  html
+    font-size: 120%
+
+// new fonts
+@font-face
+  font-family: Arial
+  src: url(/fonts/Aller_Rg.ttf)
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900)
+*
+  font-family: 'Aller', serif

@@ -1,0 +1,22 @@
+@import import-helper
+
+html
+  font-size: 100%
+
+// Medium screens(640px)
+@media (min-width: 40rem)
+  html
+    font-size: 112%
+
+// Large screens(1024px)
+@media (min-width: 64rem)
+  html
+    font-size: 120%
+
+// new fonts
+@font-face
+  font-family: 'Aller'
+  src: url('./../../../sass/shoestring/fonts/Aller_Rg.ttf')
+// @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900)
+*
+  font-family: 'Aller', serif
